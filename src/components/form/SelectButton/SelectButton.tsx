@@ -21,7 +21,6 @@ export default function SelectButton({
 	value: string;
 	setFieldValue: (name: string, value: string) => void;
 }) {
-	console.log(setFieldValue);
 	return (
 		<div className="grid grid-cols-3 gap-4">
 			{data.map((item, i) => (
@@ -33,7 +32,7 @@ export default function SelectButton({
 					<i>{item.icon}</i>
 					{item.title}
 					{item.description && (
-						<span className="text-sm text-white text-xs font-normal">
+						<span className="text-sm text-white font-normal">
 							{item.description}
 						</span>
 					)}
