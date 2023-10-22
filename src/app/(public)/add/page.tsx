@@ -28,6 +28,7 @@ import {
 	ClockIcon,
 	RupeeIcon,
 	MailIcon,
+	Cake2Icon,
 } from "@/components/icons";
 import Image from "next/image";
 
@@ -44,6 +45,7 @@ export default function AddEvent() {
 			time: "",
 			budget: "",
 			invite: "",
+			food: "",
 		},
 
 		validate: {
@@ -54,6 +56,7 @@ export default function AddEvent() {
 			time: isNotEmpty("Enter Event time"),
 			budget: isNotEmpty("Enter Event budget"),
 			invite: isNotEmpty("Enter Event invite"),
+			food: isNotEmpty("Enter Event invite"),
 		},
 	});
 
@@ -206,6 +209,42 @@ export default function AddEvent() {
 					/>
 				</>
 			)}
+			{step === 5 && (
+				<>
+					<div className="flex flex-col items-center  mb-6">
+						<Cake2Icon width={112} />
+					</div>
+					<div className="text-sm font-bold mb-4">
+						What will be the food arrangements?
+					</div>
+					<SelectButton
+						name="food"
+						value={form.values.food}
+						setFieldValue={form.setFieldValue}
+						variant="list"
+						size="sm"
+						centered={false}
+						data={[
+							{
+								title: "Order-in",
+								value: "order-in",
+							},
+							{
+								title: "Home cooked food",
+								value: "home-cooked-food",
+							},
+							{
+								title: "Book a caterer",
+								value: "book-caterer",
+							},
+							{
+								title: "Potluck",
+								value: "potluck",
+							},
+						]}
+					/>
+				</>
+			)}
 			<BottomFix>
 				<Button
 					className="bg-blue-400 text-white font-bold relative disabled:opacity-50"
@@ -220,7 +259,8 @@ export default function AddEvent() {
 								!form.isValid("date") ||
 								!form.isValid("time") ||
 								!form.isValid("budget"))) ||
-						(step === 4 && !form.isValid("invite"))
+						(step === 4 && !form.isValid("invite")) ||
+						(step === 5 && !form.isValid("food"))
 					}
 				>
 					Next
