@@ -12,6 +12,9 @@ import HeartIcon from "./heart";
 import MailIcon from "./mail";
 import PlateIcon from "./plate";
 import StarsIcon from "./stars";
+import RupeeIcon from "./Rupee";
+import ClockIcon from "./Clock";
+import CalendarIcon from "./Calendar";
 
 export {
 	BackIcon,
@@ -28,4 +31,7 @@ export {
 	MailIcon,
 	PlateIcon,
 	StarsIcon,
+	RupeeIcon,
+	ClockIcon,
+	CalendarIcon,
 };
