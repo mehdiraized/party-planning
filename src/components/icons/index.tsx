@@ -1,31 +1,31 @@
-import backIcon from "./back";
-import balloonIcon from "./balloon";
-import cakeIcon from "./cake";
-import cake2Icon from "./cake2";
-import glassIcon from "./glass";
-import glass2Icon from "./glass2";
-import goalIcon from "./goal";
-import groupIcon from "./group";
-import group2Icon from "./group2";
-import group3Icon from "./group3";
-import heartIcon from "./heart";
-import mailIcon from "./mail";
-import plateIcon from "./plate";
-import starsIcon from "./stars";
+import BackIcon from "./back";
+import BalloonIcon from "./balloon";
+import CakeIcon from "./cake";
+import Cake2Icon from "./cake2";
+import GlassIcon from "./glass";
+import Glass2Icon from "./glass2";
+import GoalIcon from "./goal";
+import GroupIcon from "./group";
+import Group2Icon from "./group2";
+import Group3Icon from "./group3";
+import HeartIcon from "./heart";
+import MailIcon from "./mail";
+import PlateIcon from "./plate";
+import StarsIcon from "./stars";
 
 export {
-	backIcon,
-	balloonIcon,
-	cakeIcon,
-	cake2Icon,
-	glassIcon,
-	glass2Icon,
-	goalIcon,
-	groupIcon,
-	group2Icon,
-	group3Icon,
-	heartIcon,
-	mailIcon,
-	plateIcon,
-	starsIcon,
+	BackIcon,
+	BalloonIcon,
+	CakeIcon,
+	Cake2Icon,
+	GlassIcon,
+	Glass2Icon,
+	GoalIcon,
+	GroupIcon,
+	Group2Icon,
+	Group3Icon,
+	HeartIcon,
+	MailIcon,
+	PlateIcon,
+	StarsIcon,
 };
