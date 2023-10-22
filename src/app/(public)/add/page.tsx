@@ -30,6 +30,7 @@ import {
 	MailIcon,
 	Cake2Icon,
 	Glass2Icon,
+	BalloonIcon,
 } from "@/components/icons";
 import Image from "next/image";
 
@@ -48,6 +49,7 @@ export default function AddEvent() {
 			invite: "",
 			food: "",
 			alcohol: "",
+			decorator: "",
 		},
 
 		validate: {
@@ -60,6 +62,7 @@ export default function AddEvent() {
 			invite: isNotEmpty("Enter Event invite"),
 			food: isNotEmpty("Enter Event food"),
 			alcohol: isNotEmpty("Enter Event alcohol"),
+			decorator: isNotEmpty("Enter Event alcohol"),
 		},
 	});
 
@@ -251,7 +254,7 @@ export default function AddEvent() {
 			{step === 6 && (
 				<>
 					<div className="flex flex-col items-center  mb-6">
-						<Glass2Icon width={112} />
+						<Glass2Icon width={100} />
 					</div>
 					<div className="text-sm font-bold mb-4">Will there be alcohol?</div>
 					<SelectButton
@@ -282,6 +285,38 @@ export default function AddEvent() {
 					/>
 				</>
 			)}
+			{step === 7 && (
+				<>
+					<div className="flex flex-col items-center  mb-6">
+						<BalloonIcon width={71} />
+					</div>
+					<div className="text-sm font-bold mb-4">
+						Do you wish to hire a decorator?
+					</div>
+					<SelectButton
+						name="decorator"
+						value={form.values.decorator}
+						setFieldValue={form.setFieldValue}
+						variant="list"
+						size="sm"
+						centered={false}
+						data={[
+							{
+								title: "Yes",
+								value: "yes",
+							},
+							{
+								title: "No",
+								value: "no",
+							},
+							{
+								title: "I will decorate myself",
+								value: "myself",
+							},
+						]}
+					/>
+				</>
+			)}
 			<BottomFix>
 				<Button
 					className="bg-blue-400 text-white font-bold relative disabled:opacity-50"
@@ -298,7 +333,8 @@ export default function AddEvent() {
 								!form.isValid("budget"))) ||
 						(step === 4 && !form.isValid("invite")) ||
 						(step === 5 && !form.isValid("food")) ||
-						(step === 6 && !form.isValid("alcohol"))
+						(step === 6 && !form.isValid("alcohol")) ||
+						(step === 7 && !form.isValid("decorator"))
 					}
 				>
 					Next
