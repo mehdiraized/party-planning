@@ -1,3 +1,24 @@
 .option {
 	display: block;
+	padding: 1rem;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	border-radius: 8px;
+	background: #251b27;
+	border: 1px solid transparent;
+	transition: all 0.3s ease-in-out;
+	font-size: 14px;
+	font-weight: 700;
+
+	&.active {
+		border: 1px solid #d898ff;
+	}
+
+	> i {
+		width: 42px;
+		height: 42px;
+		margin-bottom: 9px;
+	}
 }

@@ -1,18 +1,38 @@
+import React from "react";
+import cx from "clsx";
+
 import s from "./SelectButton.module.scss";
 
 type DataType = {
-	icon: Element;
+	icon: JSX.Element;
 	title: string;
+	value: string;
 };
 
-export default function SelectButton({ data }: { data: DataType[] }) {
+export default function SelectButton({
+	data,
+	name,
+	value,
+	setFieldValue,
+}: {
+	data: DataType[];
+	name: string;
+	value: string;
+	setFieldValue: (name: string, value: string) => void;
+}) {
+	console.log(setFieldValue);
 	return (
 		<div className="grid grid-cols-3 gap-4">
-			<button className={s.option}>Birthday</button>
-			<button className={s.option}>Anniversary</button>
-			<button className={s.option}>Dinner</button>
-			<button className={s.option}>Meet up</button>
-			<button className={s.option}>Other</button>
+			{data.map((item, i) => (
+				<button
+					className={cx(s.option, value === item.value && s.active)}
+					key={`items_${i}`}
+					onClick={() => setFieldValue(name, item.value)}
+				>
+					<i>{item.icon}</i>
+					{item.title}
+				</button>
+			))}
 		</div>
 	);
 }
