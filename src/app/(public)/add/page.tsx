@@ -31,11 +31,11 @@ import {
 	Cake2Icon,
 	Glass2Icon,
 	BalloonIcon,
+	GoalIcon,
 } from "@/components/icons";
-import Image from "next/image";
 
 export default function AddEvent() {
-	const [step, setStep] = useState(4);
+	const [step, setStep] = useState(1);
 	const router = useRouter();
 
 	const form = useForm({
@@ -50,6 +50,7 @@ export default function AddEvent() {
 			food: "",
 			alcohol: "",
 			decorator: "",
+			game: "",
 		},
 
 		validate: {
@@ -63,8 +64,14 @@ export default function AddEvent() {
 			food: isNotEmpty("Enter Event food"),
 			alcohol: isNotEmpty("Enter Event alcohol"),
 			decorator: isNotEmpty("Enter Event alcohol"),
+			game: isNotEmpty("Enter Event alcohol"),
 		},
 	});
+
+	const handleSubmitForm = (values: any) => {
+		console.log(values);
+		router.push("/");
+	};
 
 	return (
 		<>
@@ -91,7 +98,7 @@ export default function AddEvent() {
 				radius="xs"
 				size="xs"
 				color="#76A9FF"
-				value={Math.ceil((100 / 7) * step)}
+				value={Math.ceil((100 / 8) * step)}
 			/>
 			{step === 1 && (
 				<>
@@ -317,12 +324,50 @@ export default function AddEvent() {
 					/>
 				</>
 			)}
+			{step === 8 && (
+				<>
+					<div className="flex flex-col items-center  mb-6">
+						<GoalIcon width={125} />
+					</div>
+					<div className="text-sm font-bold mb-4">
+						Do you plan to rent board games?
+					</div>
+					<SelectButton
+						name="game"
+						value={form.values.game}
+						setFieldValue={form.setFieldValue}
+						variant="list"
+						size="sm"
+						centered={false}
+						data={[
+							{
+								title: "Yes",
+								value: "yes",
+							},
+							{
+								title: "No",
+								value: "no",
+							},
+							{
+								title: "I have board games at home",
+								value: "in-home",
+							},
+						]}
+					/>
+				</>
+			)}
 			<BottomFix>
 				<Button
 					className="bg-blue-400 text-white font-bold relative disabled:opacity-50"
 					size="md"
 					fullWidth
-					onClick={() => setStep((prev) => prev + 1)}
+					onClick={() => {
+						if (step === 8) {
+							handleSubmitForm(form.values);
+						} else {
+							setStep((prev) => prev + 1);
+						}
+					}}
 					disabled={
 						(step === 1 && !form.isValid("occasion")) ||
 						(step === 2 && !form.isValid("size")) ||
@@ -334,10 +379,11 @@ export default function AddEvent() {
 						(step === 4 && !form.isValid("invite")) ||
 						(step === 5 && !form.isValid("food")) ||
 						(step === 6 && !form.isValid("alcohol")) ||
-						(step === 7 && !form.isValid("decorator"))
+						(step === 7 && !form.isValid("decorator")) ||
+						(step === 8 && !form.isValid("game"))
 					}
 				>
-					Next
+					{step === 8 ? "SUBMIT" : "Next"}
 				</Button>
 			</BottomFix>
 		</>
