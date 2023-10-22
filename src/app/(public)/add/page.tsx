@@ -27,10 +27,12 @@ import {
 	CalendarIcon,
 	ClockIcon,
 	RupeeIcon,
+	MailIcon,
 } from "@/components/icons";
+import Image from "next/image";
 
 export default function AddEvent() {
-	const [step, setStep] = useState(1);
+	const [step, setStep] = useState(4);
 	const router = useRouter();
 
 	const form = useForm({
@@ -41,6 +43,7 @@ export default function AddEvent() {
 			date: "",
 			time: "",
 			budget: "",
+			invite: "",
 		},
 
 		validate: {
@@ -50,6 +53,7 @@ export default function AddEvent() {
 			date: isNotEmpty("Enter Event date"),
 			time: isNotEmpty("Enter Event time"),
 			budget: isNotEmpty("Enter Event budget"),
+			invite: isNotEmpty("Enter Event invite"),
 		},
 	});
 
@@ -174,6 +178,34 @@ export default function AddEvent() {
 					/>
 				</>
 			)}
+			{step === 4 && (
+				<>
+					<div className="flex flex-col items-center  mb-6">
+						<MailIcon width={88} />
+					</div>
+					<div className="text-sm font-bold mb-4">
+						Do you want to send e-invite?
+					</div>
+					<SelectButton
+						name="invite"
+						value={form.values.invite}
+						setFieldValue={form.setFieldValue}
+						variant="list"
+						size="sm"
+						centered={false}
+						data={[
+							{
+								title: "Yes",
+								value: true,
+							},
+							{
+								title: "No",
+								value: false,
+							},
+						]}
+					/>
+				</>
+			)}
 			<BottomFix>
 				<Button
 					className="bg-blue-400 text-white font-bold relative disabled:opacity-50"
@@ -187,7 +219,8 @@ export default function AddEvent() {
 							(!form.isValid("name") ||
 								!form.isValid("date") ||
 								!form.isValid("time") ||
-								!form.isValid("budget")))
+								!form.isValid("budget"))) ||
+						(step === 4 && !form.isValid("invite"))
 					}
 				>
 					Next
