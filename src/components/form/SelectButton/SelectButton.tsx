@@ -6,6 +6,7 @@ import s from "./SelectButton.module.scss";
 type DataType = {
 	icon: JSX.Element;
 	title: string;
+	description?: string;
 	value: string;
 };
 
@@ -31,6 +32,11 @@ export default function SelectButton({
 				>
 					<i>{item.icon}</i>
 					{item.title}
+					{item.description && (
+						<span className="text-sm text-white text-xs font-normal">
+							{item.description}
+						</span>
+					)}
 				</button>
 			))}
 		</div>

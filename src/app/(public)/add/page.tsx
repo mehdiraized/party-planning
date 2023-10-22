@@ -1,5 +1,5 @@
 "use client";
-import { ActionIcon, Button, Progress } from "@mantine/core";
+import { ActionIcon, Button, Group, Progress } from "@mantine/core";
 import { useForm, isNotEmpty } from "@mantine/form";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
@@ -12,6 +12,9 @@ import {
 	GlassIcon,
 	PlateIcon,
 	HeartIcon,
+	GroupIcon,
+	Group2Icon,
+	Group3Icon,
 } from "@/components/icons";
 
 export default function AddEvent() {
@@ -21,18 +24,19 @@ export default function AddEvent() {
 	const form = useForm({
 		initialValues: {
 			occasion: "",
+			size: "",
 			email: "",
 		},
 
 		validate: {
 			occasion: isNotEmpty("Enter Event Occasion"),
+			size: isNotEmpty("Enter Event Size"),
 			email: (value) => (/^\S+@\S+$/.test(value) ? null : "Invalid email"),
 		},
 	});
 
 	return (
 		<>
-			{console.log({ values: form.values })}
 			<header className="mb-4 flex items-center w-full">
 				<ActionIcon
 					variant="transparent"
@@ -55,6 +59,7 @@ export default function AddEvent() {
 				className="mb-4"
 				radius="xs"
 				size="xs"
+				color="#76A9FF"
 				value={Math.ceil((100 / 7) * step)}
 			/>
 			{step === 1 && (
@@ -94,13 +99,48 @@ export default function AddEvent() {
 					/>
 				</>
 			)}
+			{step === 2 && (
+				<>
+					<div className="text-sm font-bold mb-4">
+						What is the size of the guest list?
+					</div>
+					<SelectButton
+						name="size"
+						value={form.values.size}
+						setFieldValue={form.setFieldValue}
+						data={[
+							{
+								icon: <GroupIcon fill="#D898FF" />,
+								title: "Small",
+								description: "(4-20 guests)",
+								value: "small",
+							},
+							{
+								icon: <Group2Icon fill="#FF9A98" />,
+								title: "Medium",
+								description: "(20-60 guests)",
+								value: "medium",
+							},
+							{
+								icon: <Group3Icon fill="#98FF9C" />,
+								title: "Large",
+								description: "(60+ guests)",
+								value: "large",
+							},
+						]}
+					/>
+				</>
+			)}
 			<BottomFix>
 				<Button
 					className="bg-blue-400 text-white font-bold relative disabled:opacity-50"
 					size="md"
 					fullWidth
 					onClick={() => setStep((prev) => prev + 1)}
-					disabled={step === 1 && !form.isValid("occasion")}
+					disabled={
+						(step === 1 && !form.isValid("occasion")) ||
+						(step === 2 && !form.isValid("size"))
+					}
 				>
 					Next
 				</Button>
