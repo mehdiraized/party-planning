@@ -1,0 +1,6 @@
+{
+	"name": "bottom-fix",
+	"version": "0.0.0",
+	"private": true,
+	"main": "./BottomFix.tsx"
+}

@@ -1,0 +1,30 @@
+@import "../../styles/variables.scss";
+
+.BottomFix {
+	background: rgb(0, 0, 0);
+	background: linear-gradient(
+		0deg,
+		rgba(0, 0, 0, 0.9) 80%,
+		rgba(0, 0, 0, 0) 100%
+	);
+	position: absolute;
+	bottom: 0;
+	width: 100%;
+	left: 0;
+	padding: 0 24px 24px;
+	z-index: 9;
+
+	@media ($screen-mobile) {
+		position: fixed;
+	}
+
+	&.flexRow {
+		display: flex;
+		flex-direction: row;
+		justify-content: space-between;
+		align-items: center;
+	}
+}
+.BottomFixOver {
+	height: 48px;
+}
