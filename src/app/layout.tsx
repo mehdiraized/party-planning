@@ -1,13 +1,16 @@
 import "@mantine/core/styles.css";
-import "./globals.css";
+import "@/styles/globals.css";
 
 import type { Metadata } from "next";
-import { Inter } from "next/font/google";
+import { Montserrat } from "next/font/google";
 
 import { MantineProvider, ColorSchemeScript } from "@mantine/core";
-import { theme } from "@/config/theme";
+import { theme } from "@/styles/theme";
 
-const inter = Inter({ subsets: ["latin"] });
+const montserrat = Montserrat({
+	variable: "--font-base",
+	subsets: ["latin"],
+});
 
 export const metadata: Metadata = {
 	title: "Party Planning App",
@@ -20,17 +23,19 @@ export default function RootLayout({
 	children: React.ReactNode;
 }) {
 	return (
-		<html lang="en">
+		<html lang="en" className={`${montserrat.variable}`}>
 			<head>
-				<ColorSchemeScript />
-				<link rel="shortcut icon" href="/next.svg" />
+				<ColorSchemeScript defaultColorScheme="dark" />
+				<link rel="shortcut icon" href="/favicon.ico" />
 				<meta
 					name="viewport"
 					content="minimum-scale=1, initial-scale=1, width=device-width, user-scalable=no"
 				/>
 			</head>
-			<body className={inter.className}>
-				<MantineProvider theme={theme}>{children}</MantineProvider>
+			<body className={montserrat.className}>
+				<MantineProvider defaultColorScheme="dark" theme={theme}>
+					<main className="min-h-screen p-4">{children}</main>
+				</MantineProvider>
 			</body>
 		</html>
 	);
