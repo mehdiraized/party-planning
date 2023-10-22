@@ -1,8 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import { Button } from "@mantine/core";
-import CakeIcon from "@/components/icons/cake";
-import HeartIcon from "@/components/icons/heart";
+import { CakeIcon, HeartIcon } from "@/components/icons";
 
 export default function Home() {
 	return (
