@@ -1,8 +1,17 @@
 "use client";
-import { ActionIcon, Button, Group, Progress } from "@mantine/core";
+
+import {
+	ActionIcon,
+	Button,
+	NumberInput,
+	Progress,
+	TextInput,
+} from "@mantine/core";
+import { TimeInput, DateInput } from "@mantine/dates";
 import { useForm, isNotEmpty } from "@mantine/form";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+
 import SelectButton from "@/components/form/SelectButton";
 import BottomFix from "@/components/BottomFix";
 import {
@@ -15,6 +24,9 @@ import {
 	GroupIcon,
 	Group2Icon,
 	Group3Icon,
+	CalendarIcon,
+	ClockIcon,
+	RupeeIcon,
 } from "@/components/icons";
 
 export default function AddEvent() {
@@ -25,13 +37,19 @@ export default function AddEvent() {
 		initialValues: {
 			occasion: "",
 			size: "",
-			email: "",
+			name: "",
+			date: "",
+			time: "",
+			budget: "",
 		},
 
 		validate: {
 			occasion: isNotEmpty("Enter Event Occasion"),
 			size: isNotEmpty("Enter Event Size"),
-			email: (value) => (/^\S+@\S+$/.test(value) ? null : "Invalid email"),
+			name: isNotEmpty("Enter Event name"),
+			date: isNotEmpty("Enter Event date"),
+			time: isNotEmpty("Enter Event time"),
+			budget: isNotEmpty("Enter Event budget"),
 		},
 	});
 
@@ -131,6 +149,31 @@ export default function AddEvent() {
 					/>
 				</>
 			)}
+			{step === 3 && (
+				<>
+					<TextInput label="Event Name" {...form.getInputProps("name")} />
+					<DateInput
+						label="Date"
+						mt="md"
+						rightSection={<CalendarIcon width={24} />}
+						{...form.getInputProps("date")}
+					/>
+					<TimeInput
+						label="Time"
+						mt="md"
+						rightSection={<ClockIcon width={24} />}
+						{...form.getInputProps("time")}
+					/>
+					<NumberInput
+						label="Budget"
+						mt="md"
+						prefix="₹"
+						rightSection={<RupeeIcon width={10} />}
+						rightSectionPointerEvents="none"
+						{...form.getInputProps("budget")}
+					/>
+				</>
+			)}
 			<BottomFix>
 				<Button
 					className="bg-blue-400 text-white font-bold relative disabled:opacity-50"
@@ -139,7 +182,12 @@ export default function AddEvent() {
 					onClick={() => setStep((prev) => prev + 1)}
 					disabled={
 						(step === 1 && !form.isValid("occasion")) ||
-						(step === 2 && !form.isValid("size"))
+						(step === 2 && !form.isValid("size")) ||
+						(step === 3 &&
+							(!form.isValid("name") ||
+								!form.isValid("date") ||
+								!form.isValid("time") ||
+								!form.isValid("budget")))
 					}
 				>
 					Next
