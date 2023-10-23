@@ -11,6 +11,7 @@ import { TimeInput, DateInput } from "@mantine/dates";
 import { useForm, isNotEmpty } from "@mantine/form";
 import { useRouter } from "next/navigation";
 import { useState } from "react";
+import { eventsStore } from "@/store/event";
 
 import SelectButton from "@/components/form/SelectButton";
 import BottomFix from "@/components/BottomFix";
@@ -69,7 +70,7 @@ export default function AddEvent() {
 	});
 
 	const handleSubmitForm = (values: any) => {
-		console.log(values);
+		eventsStore.addTodo(values);
 		router.push("/");
 	};
 

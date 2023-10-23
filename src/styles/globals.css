@@ -17,4 +17,18 @@ body {
 	background-image: url("/add-event.png");
 	background-repeat: no-repeat;
 	background-position: right center;
+	pointer-events: none;
+}
+
+.showEvent::before {
+	content: "";
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	right: 16px;
+	background-image: url("/see-event.png");
+	background-repeat: no-repeat;
+	background-position: right center;
+	pointer-events: none;
 }
